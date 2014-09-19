@@ -1,4 +1,4 @@
-This is Pong-clone served as more "advanced" project that introduced me to framerate regulation,collision detection and basic menu and score implementation.
+This is Pong-clone served as a more "advanced" project that introduced me to framerate regulation,collision detection and basic menu and score implementation.
 
 Windows users will have to wait for binaries in the future.
 
