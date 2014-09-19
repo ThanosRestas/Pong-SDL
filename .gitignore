@@ -1,0 +1,6 @@
+ball.o
+button.o
+globals.o
+paddles.o
+pong
+timer.o
