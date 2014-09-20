@@ -4,9 +4,7 @@
 #include "button.h"
 #include "timer.h"
 
-/*Implement debug mode and pause*/
-
-//An event structure
+//THe event structure
 SDL_Event event;
 
 //The font in use
@@ -23,15 +21,17 @@ int main( int argc, char* args[] )
     bool menuState = true;
     bool gameState = false;
 
+    char score[4];
+
     Uint32 firstTick = 0;
+    int ticks = 0;
     LeftPaddle player1;
     RightPaddle player2;
     Timer delta;
     Ball ball;
     Button playButton(SCREEN_WIDTH/2-120, SCREEN_HEIGHT/2 + 200, 280 , 56);
     Button playStart(SCREEN_WIDTH/2-65 , SCREEN_HEIGHT/2, 130, 54);
-    //std::stringstream Score1 ;
-    //std::stringstream Score2 ;
+
 
     if( init() == false)
     {
@@ -40,7 +40,7 @@ int main( int argc, char* args[] )
 
     if(load_files() == false)
     {
-        return 1;
+        return 2;
     }
 
     delta.start();
@@ -85,8 +85,9 @@ int main( int argc, char* args[] )
                 }
             }
 
-            player1.move(delta.get_ticks());
-            player2.move(delta.get_ticks());
+            ticks = delta.get_ticks();
+            player1.move(ticks);
+            player2.move(ticks);
 
             if(firstTick >= 3000)
             {
@@ -96,46 +97,6 @@ int main( int argc, char* args[] )
             delta.start();
 
             SDL_FillRect( screen, &screen->clip_rect, SDL_MapRGB( screen->format, 0x00, 0x00, 0x00 ) );
-
-            if(ball.Player1Score == 0)
-            {
-                score1 = TTF_RenderText_Solid( font, "0", textColor );
-            }
-            else if( ball.Player1Score == 1)
-            {
-                SDL_FreeSurface(score1);
-                score1 = TTF_RenderText_Solid( font, "1", textColor );
-            }
-            else if( ball.Player1Score == 2)
-            {
-                SDL_FreeSurface(score1);
-                score1 = TTF_RenderText_Solid( font, "2", textColor );
-            }
-            else if( ball.Player1Score == 3)
-            {
-                SDL_FreeSurface(score1);
-                score1 = TTF_RenderText_Solid( font, "3", textColor );
-            }
-
-            if(ball.Player2Score == 0)
-            {
-                score2 = TTF_RenderText_Solid( font, "0", textColor );
-            }
-            else if( ball.Player2Score == 1)
-            {
-                SDL_FreeSurface(score2);
-                score2 = TTF_RenderText_Solid( font, "1", textColor );
-            }
-            else if( ball.Player2Score == 2)
-            {
-                SDL_FreeSurface(score2);
-                score2 = TTF_RenderText_Solid( font, "2", textColor );
-            }
-            else if( ball.Player2Score == 3)
-            {
-                SDL_FreeSurface(score2);
-                score2 = TTF_RenderText_Solid( font, "3", textColor );
-            }
 
             if(ball.Player1Score == 3)
             {
@@ -148,6 +109,13 @@ int main( int argc, char* args[] )
                 win = true;
                 winningMessage = TTF_RenderText_Solid( font, "Player 2 wins !", textColor );
             }
+
+            sprintf(score,"%d", ball.Player1Score);
+            score1 = TTF_RenderText_Solid(font,score,textColor);
+
+            sprintf(score,"%d", ball.Player2Score);
+            score2 = TTF_RenderText_Solid(font,score,textColor);
+
 
             apply_surface(SCREEN_WIDTH/2 - 100, 10, score1, screen );
             apply_surface(SCREEN_WIDTH/2 + 100, 10, score2, screen );
