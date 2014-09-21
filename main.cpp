@@ -50,14 +50,14 @@ int main( int argc, char* args[] )
 
         if(menuState == true)
         {
-                if(win == false)//Play button
+                if(win == false)//Show the PLAY button on screen
                 {
 
                     playStart.show1();
                     playStart.handle_events1(&gameState,&menuState);
 
                 }
-                else if(win == true)//Play again button
+                else if(win == true)//Show the PLAY AGAIN button on screen
                 {
                     playButton.show();
                     playButton.handle_events(&win,&ball.Player1Score,&ball.Player2Score,&menuState,&gameState,&firstTick);
