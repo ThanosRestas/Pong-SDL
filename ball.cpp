@@ -1,6 +1,6 @@
 #include "ball.h"
 
-SDL_Surface *rightPaddle = NULL ;
+SDL_Surface *paddleSprite = NULL ;
 SDL_Surface *leftPaddle = NULL ;
 SDL_Surface *ball = NULL ;
 SDL_Surface *screen = NULL ;
@@ -22,7 +22,7 @@ Ball::Ball()
     Player2Score = 0;
 }
 
-void Ball::move(float xLeftPaddle, float yLeftPaddle,float xRightPaddle, float yRightPaddle, Uint32 deltaTicks)
+void Ball::move(float xLeftPaddle, float yLeftPaddle,float xpaddleSprite, float ypaddleSprite, Uint32 deltaTicks)
 {
     y +=  yVelocity * ( deltaTicks / 1000.f );
     x +=  xVelocity * ( deltaTicks / 1000.f );
@@ -42,7 +42,7 @@ void Ball::move(float xLeftPaddle, float yLeftPaddle,float xRightPaddle, float y
         y = y+1;
         yVelocity = -yVelocity ;
     }
-    else if(x + BALL_WIDTH >= xRightPaddle && y <= yRightPaddle + PADDLE_HEIGHT && y >=yRightPaddle && x < xRightPaddle + PADDLE_WIDTH  )//Right Paddle collision
+    else if(x + BALL_WIDTH >= xpaddleSprite && y <= ypaddleSprite + PADDLE_HEIGHT && y >=ypaddleSprite && x < xpaddleSprite + PADDLE_WIDTH  )//Right Paddle collision
     {
 
         x = x-1;
@@ -51,12 +51,12 @@ void Ball::move(float xLeftPaddle, float yLeftPaddle,float xRightPaddle, float y
 
         Mix_PlayChannel(-1,collisionSound, 0);
 
-        if( y + BALL_WIDTH < yRightPaddle + (PADDLE_HEIGHT)/2 && yVelocity > 0)
+        if( y + BALL_WIDTH < ypaddleSprite + (PADDLE_HEIGHT)/2 && yVelocity > 0)
         {
             yVelocity = -yVelocity;
         }
 
-        if( y  + BALL_WIDTH >= yRightPaddle + (PADDLE_HEIGHT)/2 && yVelocity < 0)
+        if( y  + BALL_WIDTH >= ypaddleSprite + (PADDLE_HEIGHT)/2 && yVelocity < 0)
         {
             yVelocity = -yVelocity;
         }

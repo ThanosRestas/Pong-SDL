@@ -21,12 +21,12 @@ int main( int argc, char* args[] )
     bool menuState = true;
     bool gameState = false;
 
-    char score[4];
+    char score[2];
 
     Uint32 firstTick = 0;
-    int ticks = 0;
-    LeftPaddle player1;
-    RightPaddle player2;
+    int ticks = 0;    
+    Paddle player2(900,SCREEN_HEIGHT,SDLK_UP,SDLK_DOWN);
+    Paddle player1(100,0,SDLK_w,SDLK_s);
     Timer delta;
     Ball ball;
     Button playButton(SCREEN_WIDTH/2-120, SCREEN_HEIGHT/2 + 200, 280 , 56);
@@ -76,8 +76,8 @@ int main( int argc, char* args[] )
 
             while( SDL_PollEvent(&event))
             {
-                player1.handle_left_input();
-                player2.handle_right_input();
+                player1.handle_input();
+                player2.handle_input();
 
                 if(event.type == SDL_QUIT)
                 {

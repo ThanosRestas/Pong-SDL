@@ -7,6 +7,7 @@
 #include <string>
 #include <stdlib.h>
 #include <sstream>
+#include <stdio.h>
 
 //Screen attributes
 const int SCREEN_WIDTH = 1024;
@@ -21,8 +22,7 @@ const int BALL_HEIGHT =18;
 const int SPEED = 1000;
 
 //The surfaces
-extern SDL_Surface *rightPaddle ;
-extern SDL_Surface *leftPaddle ;
+extern SDL_Surface *paddleSprite ;
 extern SDL_Surface *ball ;
 extern SDL_Surface *screen ;
 extern SDL_Surface *button ;

@@ -1,84 +1,40 @@
 #include "paddles.h"
 
-
-
-
-RightPaddle::RightPaddle()
+Paddle::Paddle(int xUser , int yUser, SDLKey key1, SDLKey key2)
 {
-    x = 900;
-    y = SCREEN_HEIGHT;
+    x = xUser;
+    y = yUser;
     yVelocity = 0;
+    paddleUp = key1;
+    paddleDown = key2;
 }
 
-void RightPaddle::handle_right_input()
+void Paddle::handle_input()
 {
-
     if(event.type == SDL_KEYDOWN)
     {
-        switch(event.key.keysym.sym)
+        if(event.key.keysym.sym == paddleUp)
         {
-            case SDLK_UP: yVelocity -= SPEED  ; break;
-            case SDLK_DOWN: yVelocity += SPEED ; break;
+            yVelocity -= SPEED;
+        }
+        else if(event.key.keysym.sym == paddleDown)
+        {
+            yVelocity += SPEED;
         }
     }
     else if(event.type == SDL_KEYUP)
     {
-        switch(event.key.keysym.sym)
+        if(event.key.keysym.sym == paddleUp)
         {
-            case SDLK_UP: yVelocity += SPEED; break;
-            case SDLK_DOWN: yVelocity -= SPEED ;break;
+            yVelocity += SPEED;
+        }
+        else if(event.key.keysym.sym == paddleDown)
+        {
+            yVelocity -= SPEED;
         }
     }
 }
-
-void RightPaddle::move(Uint32 deltaTicks)
-{
-    y += yVelocity  * ( deltaTicks / 1000.f ) ;
-
-    if( y  < 0 )
-    {
-        y =  0;
-
-    }
-    else if( y + PADDLE_HEIGHT > SCREEN_HEIGHT)
-    {
-        y = SCREEN_HEIGHT - PADDLE_HEIGHT;
-    }
-}
-
-void RightPaddle::show()
-{
-    apply_surface( (int)x, (int)y, rightPaddle, screen );
-}
-
-LeftPaddle::LeftPaddle()
-{
-    x = 100;
-    y = 0;
-    yVelocity = 0;
-}
-
-void LeftPaddle::handle_left_input()
-{
-    if(event.type == SDL_KEYDOWN)
-    {
-        switch(event.key.keysym.sym)
-        {
-            case SDLK_w: yVelocity -= SPEED  ; break;
-            case SDLK_s: yVelocity += SPEED  ; break;
-        }
-    }
-    else if(event.type == SDL_KEYUP)
-    {
-        switch(event.key.keysym.sym)
-        {
-            case SDLK_w: yVelocity += SPEED ; break;
-            case SDLK_s: yVelocity -= SPEED ; break;
-        }
-    }
-}
-
-void LeftPaddle::move(Uint32 deltaTicks)
+void Paddle::move(Uint32 deltaTicks)
 {
     y += yVelocity * ( deltaTicks / 1000.f );
 
@@ -92,7 +48,8 @@ void LeftPaddle::move(Uint32 deltaTicks)
     }
 }
 
-void LeftPaddle::show()
+void Paddle::show()
 {
-    apply_surface( (int)x, (int)y, leftPaddle, screen );
+    apply_surface( (int)x, (int)y, paddleSprite, screen );
 }
+

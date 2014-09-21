@@ -12,7 +12,7 @@ class Ball
         Uint32 Player1Score ;
         Uint32 Player2Score ;
         Ball();
-        void move(float xLeftPaddle, float yLeftPaddle,float xRightPaddle, float yRightPaddle, Uint32 deltaticks);
+        void move(float xLeftPaddle, float yLeftPaddle,float xpaddleSprite, float ypaddleSprite, Uint32 deltaticks);
         void show();
 };
 

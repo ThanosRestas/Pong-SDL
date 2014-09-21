@@ -85,20 +85,15 @@ SDL_Surface *load_image( std::string filename )
 bool load_files()
 {
     //Load the dot image
-    leftPaddle = load_image( "assets/Paddle.bmp" );
-    rightPaddle = load_image( "assets/Paddle.bmp" );
+    paddleSprite = load_image( "assets/Paddle.bmp" );
     ball = load_image("assets/ball.bmp");
     font = TTF_OpenFont("assets/agentorange.ttf",30);
     collisionSound = Mix_LoadWAV("assets/bounce.wav");
     button = load_image("assets/playAgain.bmp");
     button2 = load_image("assets/play.bmp");
 
-    if( leftPaddle == NULL )
-    {
-        return false;
-    }
 
-    if( rightPaddle == NULL )
+    if( paddleSprite == NULL )
     {
         return false;
     }
@@ -134,9 +129,8 @@ bool load_files()
 
 void clean_up()
 {
-    //Free the surface
-    SDL_FreeSurface( leftPaddle );
-    SDL_FreeSurface( rightPaddle );
+    //Free the surface    
+    SDL_FreeSurface( paddleSprite );
     SDL_FreeSurface( ball );
     SDL_FreeSurface(score1);
     SDL_FreeSurface(score2);
