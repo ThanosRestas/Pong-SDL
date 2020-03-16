@@ -1,7 +1,16 @@
 # Pong SDL
-The classic game of Tic Tac Toe ported to modern systems using the [SDL](https://www.libsdl.org/index.php).
+The classic game of Pong ported to modern systems using the [SDL](https://www.libsdl.org/index.php).
 
 <img src="https://media.giphy.com/media/hvShNDhzrxEl74r5Ev/giphy.gif">
+
+# Intro
+
+Main purpose of this project was to get familiar with practices such as :
+
+* Processing input from various sources WASD and Arrow Keys for 2 players
+* Implementing a basic collision systems
+* User Interface creation and handling 
+* Main menu and game over screen implementation
 
 # Overview
 
